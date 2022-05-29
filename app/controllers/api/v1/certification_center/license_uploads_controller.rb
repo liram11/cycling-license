@@ -2,6 +2,7 @@ class Api::V1::CertificationCenter::LicenseUploadsController < ApplicationContro
 
 # curl -H 'Content-Type: multipart/form-data' -F license_upload[file]=@/Users/liram/work/cycling-license-interview-task/cycling-license/spec/fixtures/license_upload/correct.csv http://localhost:3000/api/v1/certification_center/license_uploads
   def create
+    # TODO: consider adding some file size limits
     license_upload = LicenseUpload.create!(
       certification_center: current_user
     )

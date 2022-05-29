@@ -1,6 +1,6 @@
 class ProcessLicenseUpload
   include Sneakers::Worker
-  from_queue 'process_license_upload'
+  from_queue 'process_license_upload', workers: 1
 
   def work(msg)
     message = JSON.parse(msg, :symbolize_names => true)
@@ -10,7 +10,7 @@ class ProcessLicenseUpload
 
     license_upload = LicenseUpload.find(license_upload_id)
 
-    ProcessLicensesCsv.call(license_upload.csv.download)
+    ProcessLicensesCsv.call(license_upload, license_upload.csv.download)
 
     ack!
   end
