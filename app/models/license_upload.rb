@@ -1,0 +1,2 @@
+class LicenseUpload < ApplicationRecord
+end

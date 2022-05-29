@@ -1,0 +1,2 @@
+class CertificationCenter < ApplicationRecord
+end
