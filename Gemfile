@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "bunny", ">= 2.19.0"
+gem 'active_model_serializers'
 
 
 group :development, :test do

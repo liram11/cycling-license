@@ -1,0 +1,2 @@
+module LicenseUploadsHelper
+end
