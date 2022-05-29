@@ -1,0 +1,3 @@
+email;first_name;last_name;issued_at;expires_at
+test1@gmail.com;Alex;Black;2021-10-05T00:00:00.000Z;2026-10-05T00:00:00.000Z
+test2@gmail.com;Michael;Gray;2022-01-05T00:00:00.000Z;2027-10-05T00:00:00.000Z
