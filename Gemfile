@@ -52,7 +52,7 @@ gem "bootsnap", require: false
 
 gem "bunny", ">= 2.19.0"
 gem 'active_model_serializers'
-
+gem 'sneakers'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
