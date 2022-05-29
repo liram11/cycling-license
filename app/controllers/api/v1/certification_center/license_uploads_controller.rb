@@ -8,7 +8,7 @@ class Api::V1::CertificationCenter::LicenseUploadsController < ApplicationContro
 
     license_upload.csv.attach(license_upload_params[:file])
 
-    Rabbit::TaskPublisher.call(
+    RabbitService::TaskPublisher.call(
       queue_name: 'process_license_upload',
       data: {
         license_upload_id: license_upload.id

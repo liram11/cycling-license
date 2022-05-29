@@ -1,4 +1,4 @@
-module Rabbit
+module RabbitService
   class TaskPublisher < ApplicationService
     def initialize(queue_name:, data:)
       raise ArgumentError, 'queue_name should be a String' unless queue_name.is_a?(String)
@@ -12,7 +12,7 @@ module Rabbit
       channel = Rabbitmq.connect
       queue = channel.queue(@queue_name, durable: true)
 
-      queue.publish(@message, persistent: true)
+      pp queue.publish(@message, persistent: true)
     end
   end
 end
