@@ -1,23 +1,21 @@
 require 'csv'
 
 class ProcessLicensesCsv < ApplicationService
-  def initialize(license_upload, csv)
+  def initialize(license_upload)
     @license_upload = license_upload
-    @csv = csv
   end
 
   def call
-    row_count = 0
-    CSV.parse(@csv, headers: true,  col_sep: ';') do |row|
-      RabbitService::TaskPublisher.call(
-        queue_name: 'generate_license',
-        data: row.to_h.merge({
-          license_upload_id: @license_upload_id
+    csv = @license_upload.csv.download
+
+    CSV.parse(csv, headers: true,  col_sep: ';') do |row|
+      # TODO extract every pdf generation in separted task
+      user_license = GenerateUserLicense.call(
+        row.to_h.symbolize_keys.merge({
+          license_upload_id: @license_upload.id,
+          certification_center_id: @license_upload.certification_center.id
         })
       )
-      row_count += 1
     end
-
-    @license_upload.update!(row_count: row_count)
   end
 end
