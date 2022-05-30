@@ -50,7 +50,7 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "bunny", ">= 2.19.0"
+gem "bunny", "~> 2.19.0"
 gem 'active_model_serializers'
 gem 'sneakers'
 

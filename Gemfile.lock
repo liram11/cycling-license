@@ -261,7 +261,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bootsnap
-  bunny (>= 2.19.0)
+  bunny (~> 2.19.0)
   capybara
   debug
   importmap-rails
