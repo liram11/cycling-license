@@ -12,6 +12,25 @@ class ProcessLicenseUpload
 
     ProcessLicensesCsv.call(license_upload)
 
+    notify_certification_center
+
     ack!
+  end
+
+  private
+
+  def notify_certification_center
+    errors_count = license_upload.license_upload_errors.count
+
+    mail_data = {
+      template: 'certification-center-csv-processed',
+      data: {
+        errors_count: errors_count
+        license_upload_id: license_upload.id
+      }
+      # TODO add template data
+    }
+
+    MailingService::Mailer.call(mail_data)
   end
 end

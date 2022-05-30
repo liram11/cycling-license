@@ -17,7 +17,12 @@ class ProcessLicensesCsv < ApplicationService
         })
       )
 
-      MailingService::Mailer.call(user_license.attributes)
+      mail_data = {
+        template: 'user-license-processed'
+        # TODO add attachment and template data
+      }
+
+      MailingService::Mailer.call(mail_data)
     end
   end
 end
