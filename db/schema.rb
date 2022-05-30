@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_225039) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_232621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -52,16 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_225039) do
     t.index ["email"], name: "index_certification_centers_on_email", unique: true
   end
 
-  create_table "cycling_licenses", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "certification_center_id", null: false
-    t.datetime "expires_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["certification_center_id"], name: "index_cycling_licenses_on_certification_center_id"
-    t.index ["user_id"], name: "index_cycling_licenses_on_user_id"
-  end
-
   create_table "license_upload_errors", force: :cascade do |t|
     t.bigint "license_upload_id", null: false
     t.jsonb "data", default: {}, null: false
@@ -78,6 +68,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_225039) do
     t.index ["certification_center_id"], name: "index_license_uploads_on_certification_center_id"
   end
 
+  create_table "user_licenses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "certification_center_id", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "license_type", null: false
+    t.index ["certification_center_id"], name: "index_user_licenses_on_certification_center_id"
+    t.index ["user_id"], name: "index_user_licenses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.citext "email"
     t.string "encrypted_password"
@@ -91,8 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_225039) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "cycling_licenses", "certification_centers"
-  add_foreign_key "cycling_licenses", "users"
   add_foreign_key "license_upload_errors", "license_uploads"
   add_foreign_key "license_uploads", "certification_centers"
+  add_foreign_key "user_licenses", "certification_centers"
+  add_foreign_key "user_licenses", "users"
 end
