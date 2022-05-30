@@ -6,7 +6,7 @@ class GenerateUserLicense < ApplicationService
   end
 
   def call
-    unless is_params_valid?
+    unless is_params_valid?(@params)
       LicenseUploadError.create!(license_upload_id: @params[:license_upload_id], data: @params)
       return
     end
@@ -14,6 +14,8 @@ class GenerateUserLicense < ApplicationService
     user = User.find_or_initialize_by(email: @params[:email])
 
     if user.new_record?
+      user.name = @params[:name]
+      user.last_name = @params[:last_name]
       user.save!
     end
 
@@ -23,7 +25,11 @@ class GenerateUserLicense < ApplicationService
   private
 
   # TODO check if params valid
-  def is_params_valid?
+  def is_params_valid?(params)
+    return false if params[:name].blank? || params[:last_name].blank?
+    return false unless params[:email].include?('@')
+    return false if params[:expires_at].blank?
+
     true
   end
 

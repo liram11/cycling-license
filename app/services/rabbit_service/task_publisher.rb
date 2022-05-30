@@ -12,7 +12,7 @@ module RabbitService
       channel = Rabbitmq.connect
       queue = channel.queue(@queue_name, durable: true)
 
-      pp queue.publish(@message, persistent: true)
+      queue.publish(@message, persistent: true)
     end
   end
 end
