@@ -1,24 +1,30 @@
-# README
+# Set up
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For now run this comands in console:
 
-Things you may want to cover:
+```
+bundle
+createdb cycling_license_development
+rails db:migrate
+```
 
-* Ruby version
+# Start main server
+```
+rails s
+```
 
-* System dependencies
+# Start RabbitMQ
+```
+docker-compose up
+```
 
-* Configuration
+# Start sneakers workers
+```
+rake sneakers:run
+```
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#TODO:
+- Extract pdf generation to separated tasks if needed.
+- Add mailing service.
+- Add procfile.
