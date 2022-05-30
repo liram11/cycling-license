@@ -4,6 +4,10 @@ Rails.application.routes.draw do
       namespace :certification_center do
         resources :license_uploads, only: [:show, :create]
       end
+
+      namespace :user do
+        resources :licenses, only: [:index, :show]
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

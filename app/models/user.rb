@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  has_many :cycling_licenses
+  has_many :user_licenses
 end

@@ -4,7 +4,7 @@ class Api::V1::CertificationCenter::LicenseUploadsController < ApplicationContro
   def create
     # TODO: consider adding some file size limits
     license_upload = LicenseUpload.create!(
-      certification_center: current_user
+      certification_center: current_certification_center
     )
 
     license_upload.csv.attach(license_upload_params[:file])
@@ -16,7 +16,7 @@ class Api::V1::CertificationCenter::LicenseUploadsController < ApplicationContro
       }
     )
 
-    render json: license_upload, serializer: Api::V1::LicenseUploadSerializer, status: 200
+    render json: license_upload, serializer: Api::V1::LicenseUploadSerializer
   end
 
   # TODO
