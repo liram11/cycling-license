@@ -12,21 +12,21 @@ class ProcessLicenseUpload
 
     ProcessLicensesCsv.call(license_upload)
 
-    notify_certification_center
+    notify_certification_center(license_upload)
 
     ack!
   end
 
   private
 
-  def notify_certification_center
+  def notify_certification_center(license_upload)
     errors_count = license_upload.license_upload_errors.count
 
     mail_data = {
       template: 'certification-center-csv-processed',
       email: license_upload.certification_center.email,
       data: {
-        errors_count: errors_count
+        errors_count: errors_count,
         license_upload_id: license_upload.id
       }
       # TODO add template data

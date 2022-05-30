@@ -16,7 +16,7 @@ class Api::V1::CertificationCenter::LicenseUploadsController < ApplicationContro
       }
     )
 
-    render json: license_upload, serializer: Api::V1::LicenseUploadSerializer
+    render json: license_upload, serializer: Api::V1::LicenseUploadSerializer, status: 200
   end
 
   # TODO
