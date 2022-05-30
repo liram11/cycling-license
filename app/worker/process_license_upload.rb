@@ -24,6 +24,7 @@ class ProcessLicenseUpload
 
     mail_data = {
       template: 'certification-center-csv-processed',
+      email: license_upload.certification_center.email,
       data: {
         errors_count: errors_count
         license_upload_id: license_upload.id
