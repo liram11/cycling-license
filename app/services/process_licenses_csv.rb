@@ -16,6 +16,8 @@ class ProcessLicensesCsv < ApplicationService
           certification_center_id: @license_upload.certification_center.id
         })
       )
+
+      MailingService::Mailer.call(user_license.attributes)
     end
   end
 end
